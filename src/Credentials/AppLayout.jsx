@@ -35,7 +35,7 @@ export const AppLayout = () => {
         <div className={styles.glassContainer} data-aos = "flip-left" data-aos-duration="1400">
           <div className={styles.worried}>
             <div data-aos = "zoom-in" >
-            <img src="../assets/Images/min1.gif"  />
+            <img src="https://imgur.com/ycjlygp.gif"  />
             </div>
             
             <div className={styles.contentContainer} >
@@ -66,7 +66,7 @@ export const AppLayout = () => {
                 for seamless time management.
               </p>
             </div>
-            <img src="../assets/Images/min2.gif" data-aos = "flip-left" data-aos-duration="1000" />
+            <img src="https://imgur.com/8tk0Xi6.gif" data-aos = "flip-left" data-aos-duration="1000" />
           </div>
         </div>
       </div>

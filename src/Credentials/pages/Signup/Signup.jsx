@@ -133,7 +133,7 @@ export const Signup = () => {
         <div>
           <h1>
             <Link to="/" className={styles.logo}>
-            <img src='../../assets/Images/quick.png' className="w-12 h-12"/><span className="font-garamond font-serif text-3xl mt-1 pl-2">Timely</span>
+            <img src='https://imgur.com/m3Vpsos.png' className="w-12 h-12"/><span className="font-garamond font-serif text-3xl mt-1 pl-2">Timely</span>
             </Link>
           </h1>
         </div>
