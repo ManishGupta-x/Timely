@@ -71,10 +71,10 @@ export const AppLayout = () => {
         </div>
       </div>
       <div className={styles.container3}>
-        <div className={styles.glass1}  data-aos = "fade-right" data-aos-duration="1000">
+        <div className={styles.glass1} >
           
         </div>
-        <div className={styles.glass1}   data-aos = "fade-left" data-aos-duration="1000">
+        <div className={styles.glass1} >
           
           </div>
       </div>
