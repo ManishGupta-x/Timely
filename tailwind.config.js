@@ -6,6 +6,7 @@ module.exports = {
       display: ['Open Sans', 'sans-serif'],
       body: ['Open Sans', 'sans-serif'],
       garamond: ['"EB Garamond"', 'serif'],
+      'lora': ['Lora', 'serif'],
     },
     extend: {
       fontSize: {

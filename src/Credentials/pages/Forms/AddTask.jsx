@@ -236,5 +236,6 @@ export const AddTask = () => {
     </div>
   );
 };
+export default AddTask;
 
 export const No_of_tasks = "";

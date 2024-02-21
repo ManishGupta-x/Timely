@@ -13,7 +13,7 @@ import { AppLayout } from './Credentials/AppLayout.jsx'
 import { ContextProvider } from "./contexts/ContextProvider.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {AddSchedule} from "./Credentials/pages/Forms/AddSchedule.jsx";
-import { AddTask } from "./Credentials/pages/Forms/Addtask.jsx";
+import  AddTask from "./Credentials/pages/Forms/Addtask.jsx";
 
 
 ReactDOM.render(
