@@ -14,11 +14,39 @@ const UserProfile = () => {
   const [email, setEmail] = useState(useremail);
   
 
-
   useEffect(() => {
-      fetchUser();
-  }, []); // Empty dependency array ensures the effect runs only once after the initial render
+    const fetchUserData = async () => {
+      const url = "https://timely-qpcg.onrender.com/api/getuserbyemail";
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
 
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+
+        const responseData = await response.json();
+        console.log('User data:', responseData);
+        setUsername(responseData.data.username);
+        if (responseData.error) {
+          throw new Error(responseData.error_message || 'Error fetching user data');
+        }
+
+        setUserData(responseData.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [email]);
+
+  
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">

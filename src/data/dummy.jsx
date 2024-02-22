@@ -969,7 +969,7 @@ export const taskData = [
     Location: "Space Center USA",
     StartTime: "2021-01-10T07:00:00.000Z",
     EndTime: "2021-01-10T08:30:00.000Z",
-    CategoryColor: "#a1223d",
+    CategoryColor: "#a12  23d",
   },
 ];
 

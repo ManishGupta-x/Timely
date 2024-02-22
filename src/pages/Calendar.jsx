@@ -26,8 +26,7 @@ export const Calendar = () => {
     scheduleObj.dataBind();
   };
   const onDragStop = (args) => {
-    // args contains information about the dragged event
-    //update from args
+    
     
     console.log('Drag stopped', args);
   };

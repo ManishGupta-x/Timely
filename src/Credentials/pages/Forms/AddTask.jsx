@@ -54,7 +54,7 @@ export const AddTask = () => {
   const submitForm = async (values) => {
     
     values.schedule_color = getRandomHexColor();
-    values.schedule_id = scheduleId;
+    values.schedule= scheduleId;
     const token = localStorage.getItem("token");
 
     const fetchUrl = "https://timely-qpcg.onrender.com/api/tasks";
@@ -132,7 +132,7 @@ export const AddTask = () => {
 
   const Formik = useFormik({
     initialValues: {
-      schedule_id: "",
+      schedule: "",
       name: "",
       difficulty: "",
       priority: "",

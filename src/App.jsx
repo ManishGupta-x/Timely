@@ -81,7 +81,7 @@ const App = () => {
                 <Route path="/editor" element={<Editor />} />
                 <Route path="/calendar" element={<Calendar />} />
               <Route path="/tasks/:scheduleId" element={<TaskGridComponent />} />
-              <Route path="/calendar/:scheduleId" element={<SCalendar/>} />
+              <Route path="/Time Tables/calendar/:scheduleId" element={<SCalendar/>} />
 
               
               </Routes> 

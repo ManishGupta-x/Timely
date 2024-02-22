@@ -72,7 +72,13 @@ export const AppLayout = () => {
       </div>
       <div className={styles.container3}>
         <div className={styles.glass1} >
-          
+          <h2 className="text-white text-2xl font-garamond">Attributes</h2>
+          <ul className="text-white">
+            <li>Make Your Schedules</li>
+            <li>Make Your Schedules</li>
+            <li>Make Your Schedules</li>
+
+          </ul>
         </div>
         <div className={styles.glass1} >
           

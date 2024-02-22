@@ -2,8 +2,11 @@ import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page 
 import { Header } from '../components';
 import { getScheduleData } from "./data";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const TimeTable = () => {
+
+  const navigate = useNavigate(); 
   const toolbarOptions = ['Search'];
   const [tableData, setTableData] = useState([]);
 
@@ -86,9 +89,9 @@ export const TimeTable = () => {
   ];
 
   const editing = { allowDeleting: true, allowEditing: true };
-	const handleRowSelected = (args) => {
+  const handleRowSelected = (args) => {
     const scheduleId = args.data.SchdeuleID;
-		// navigate(`/home/calendar/${scheduleId}`);
+		 navigate(`/home/Time Tables/calendar/${scheduleId}`);
 	};
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-slate-50 rounded-3xl">

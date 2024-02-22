@@ -14,7 +14,7 @@ import { No_of_tasks } from "../Credentials/pages/Forms/AddSchedule";
 export const Schedules = () => {
   const navigate = useNavigate();
   const email = localStorage.getItem("email");
-  const [id, setId] = useState("");
+  const [id, setId] = useState(0);
   const [scheduleData, setScheduleData] = useState([]);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export const Schedules = () => {
 
       const responseData = await response.json();
       console.log("User data:", responseData);
-
+      
       if (responseData.error) {
         throw new Error(
           responseData.error_message || "Error fetching user data"
@@ -119,16 +119,19 @@ export const Schedules = () => {
       <p>{props.Name}</p>
     </div>
   );
-
+ 
   const gridTimeTableButton = (props) => (
     <div>
+      <Link to = {`/home/Time Tables/calendar/${props.SchdeuleID}`}>
       {props.Button ? (
-        <button className="bg-orange-500 hover:bg-orange-700 text-white  py-2 px-4 rounded">
+        <button className="bg-orange-500 hover:bg-orange-700 text-white  py-2 px-4 rounded"  >
           Create
         </button>
       ) : (
         <p className="text-red-500">Already Exist</p>
       )}
+      </Link>
+      
     </div>
   );
 
@@ -190,7 +193,7 @@ export const Schedules = () => {
 	
 	// Check if the click was on a button
 	if (targetElement && targetElement.tagName === 'BUTTON') {
-	  // Handle button click, if necessary
+      console.log(targetElement);
 	} else {
 	  console.log("Navigating to Tasks off", scheduleId);
 	  navigate(`/home/tasks/${scheduleId}`);
