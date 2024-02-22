@@ -25,7 +25,7 @@ const Sidebar = () => {
         <>
           <div className="flex justify-between items-center">
             <Link to="/" onClick={handleCloseSideBar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
-              <img src='../assets/Images/quick.png' className="w-12 h-12"/><span className="font-garamond font-serif text-2xl">Timely</span>
+              <img src='https://imgur.com/m3Vpsos.png' className="w-12 h-12"/><span className="font-garamond font-serif text-2xl">Timely</span>
             </Link>
             <TooltipComponent content="Menu" position="BottomCenter">
               <button
