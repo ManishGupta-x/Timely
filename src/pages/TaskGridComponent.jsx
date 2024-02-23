@@ -9,9 +9,12 @@ import {
 } from "@syncfusion/ej2-react-grids";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "../components";
+import Loading from "../components/Loadingstate"
 
 const TaskGridComponent = () => {
   const { scheduleId } = useParams();
+  const [loading, setLoading] = useState(true); // State for loading indicator
+
   console.log("ID",scheduleId);
   const [tasksData, setTasksData] = useState([]);
   async function fetchAvatar(name) {
@@ -71,6 +74,7 @@ const TaskGridComponent = () => {
         }));
         console.log(taskData);
         setTasksData(taskData);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
@@ -120,18 +124,22 @@ const TaskGridComponent = () => {
           </Link>
         </button>
       </div>
-      <GridComponent
-        dataSource={tasksData}
-        allowPaging={true}
-        pageSettings={{ pageCount: 5 }}
-      >
-        <ColumnsDirective>
-          {TimetableGrid.map((item, index) => (
-            <ColumnDirective key={index} {...item} />
-          ))}
-        </ColumnsDirective>
-        <Inject services={[Search, Page]} />
-      </GridComponent>
+      {
+        loading ? <Loading /> :
+      
+          <GridComponent
+            dataSource={tasksData}
+            allowPaging={true}
+            pageSettings={{ pageCount: 5 }}
+          >
+            <ColumnsDirective>
+              {TimetableGrid.map((item, index) => (
+                <ColumnDirective key={index} {...item} />
+              ))}
+            </ColumnsDirective>
+            <Inject services={[Search, Page]} />
+          </GridComponent>
+      }
     </div>
   );
 };

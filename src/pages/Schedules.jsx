@@ -10,13 +10,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Header } from "../components";
 import { No_of_tasks } from "../Credentials/pages/Forms/AddSchedule";
-
+import Loading from "../components/Loadingstate"
 export const Schedules = () => {
   const navigate = useNavigate();
   const email = localStorage.getItem("email");
   const [id, setId] = useState(0);
   const [scheduleData, setScheduleData] = useState([]);
-
+  const [loading, setLoading] = useState(true); // State for loading indicator
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,6 +50,7 @@ export const Schedules = () => {
           }))
         );
         setScheduleData(scheduleD);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching schedule data:", error);
       }
@@ -212,7 +213,8 @@ export const Schedules = () => {
           </Link>
         </button>
       </div>
-
+      {loading ? <Loading /> : 
+      
       <GridComponent
         dataSource={scheduleData}
         width="auto"
@@ -229,7 +231,9 @@ export const Schedules = () => {
           ))}
         </ColumnsDirective>
         <Inject services={[Search, Page]} />
-      </GridComponent>
+        </GridComponent>
+      }
+      
     </div>
   );
 };

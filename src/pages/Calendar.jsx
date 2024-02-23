@@ -77,7 +77,7 @@ export const Calendar = () => {
             <tr style={{ height: '50px' }}>
               <td style={{ width: '100%' }}>
                 <DatePickerComponent
-                  value={new Date(2021, 0, 10)}
+                  value={new Date(2024, 1, 23)}
                   showClearButton={false}
                   placeholder="Current Date"
                   floatLabelType="Always"

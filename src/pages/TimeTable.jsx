@@ -1,14 +1,21 @@
-import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page } from '@syncfusion/ej2-react-grids';
-import { Header } from '../components';
+import {
+  GridComponent,
+  Inject,
+  ColumnsDirective,
+  ColumnDirective,
+  Search,
+  Page,
+} from "@syncfusion/ej2-react-grids";
+import { Header } from "../components";
 import { getScheduleData } from "./data";
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loadingstate";
 export const TimeTable = () => {
-
-  const navigate = useNavigate(); 
-  const toolbarOptions = ['Search'];
+  const navigate = useNavigate();
+  const toolbarOptions = ["Search"];
   const [tableData, setTableData] = useState([]);
+  const [loading, setLoading] = useState(true); // State for loading indicator
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +23,7 @@ export const TimeTable = () => {
         const scheduleData = await getScheduleData();
         const tableD = await Promise.all(
           scheduleData
-            .filter(item => item.has_timetable === true)
+            .filter((item) => item.has_timetable === true)
             .map(async (item) => ({
               Name: item.name.charAt(0).toUpperCase() + item.name.slice(1), // Capitalize first letter
               Duration: item.duration,
@@ -26,9 +33,10 @@ export const TimeTable = () => {
             }))
         );
         setTableData(tableD);
+        setLoading(false);
         console.log("TT data:", tableD); // Log tableD after setting state
       } catch (error) {
-        console.error('Error fetching schedule data:', error);
+        console.error("Error fetching schedule data:", error);
       }
     };
 
@@ -91,27 +99,33 @@ export const TimeTable = () => {
   const editing = { allowDeleting: true, allowEditing: true };
   const handleRowSelected = (args) => {
     const scheduleId = args.data.SchdeuleID;
-		 navigate(`/home/Time Tables/calendar/${scheduleId}`);
-	};
+    navigate(`/home/Time Tables/calendar/${scheduleId}`);
+  };
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-slate-50 rounded-3xl">
       <Header category="Page" title="Time Tables" />
-      
-      <GridComponent
-        dataSource={tableData}
-        width="auto"
-        allowPaging
-        allowSorting
-        pageSettings={{ pageCount: 5 }}
-        editSettings={editing}
-        toolbar={toolbarOptions}
-				rowSelected={handleRowSelected}
-      >
-        <ColumnsDirective>
-          {TimetableGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
-        </ColumnsDirective>
-        <Inject services={[Search, Page]} />
-      </GridComponent>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <GridComponent
+          dataSource={tableData}
+          width="auto"
+          allowPaging
+          allowSorting
+          pageSettings={{ pageCount: 5 }}
+          editSettings={editing}
+          toolbar={toolbarOptions}
+          rowSelected={handleRowSelected}
+        >
+          <ColumnsDirective>
+            {TimetableGrid.map((item, index) => (
+              <ColumnDirective key={index} {...item} />
+            ))}
+          </ColumnsDirective>
+          <Inject services={[Search, Page]} />
+        </GridComponent>
+      )}
     </div>
   );
 };
