@@ -227,8 +227,8 @@ export const SCalendar = () => {
             </PropertyPane>
           </>
         )}
-      </div>
       <ToastContainer autoClose={2000} limit={1} />
+      </div>
     </>
   );
 };

@@ -47,14 +47,7 @@ const UserProfile = () => {
     fetchUserData();
   }, [email]);
 
-  const handleLogout = () => {
-   
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
-    console.log("removed items");
-    navigate("/");
-   
-  };
+
 
   
   return (
@@ -81,16 +74,17 @@ const UserProfile = () => {
         </div>
       </div>
      
-      <div className="mt-5">
+      
         <Button
           color="white"
           bgColor={currentColor}
           text="Logout"
           borderRadius="10px"
-          width="full"
-          onClick={handleLogout}
+        width="full"
+        className="mt-5"
+         
         />
-      </div>
+      
     </div>
 
   );
