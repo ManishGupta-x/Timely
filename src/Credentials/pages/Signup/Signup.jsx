@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Route ,useNavigate} from "react-router-dom";
 
 import { FaUser } from "react-icons/fa";
 import styles from "./Signup.module.css";
@@ -7,9 +7,13 @@ import { IoEyeSharp } from "react-icons/io5";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "../../../components/Loadingstate";
+
 
 export const Signup = () => {
- 
+  const navigate = useNavigate();
+  const [Errors, setErrors] = useState(true);
+  const [loading, setLoading] = useState(false); // State for loading indicator
   const validate = (values) => {
     let errors = {};
     
@@ -78,6 +82,9 @@ export const Signup = () => {
   const submitForm = async (values) => {
     
     try {
+      if (!Errors) {
+        setLoading(true);
+      }
       const response = await fetch(`https://timely-qpcg.onrender.com/api/register`, {
       
       method: 'POST',
@@ -96,9 +103,11 @@ export const Signup = () => {
         const data = await response.json();
         console.log("data", data);
         console.log("response", response);
-      console.log(data.success_message);
-      notifys("Account Created Successfully")
-      setErrors(false);
+        console.log(data.success_message);
+        notifys("Account Created Successfully")
+        setLoading(false);
+        navigate("/signin")
+        setErrors(false);
         return data.error;
       
     } catch (error) {
@@ -111,7 +120,6 @@ export const Signup = () => {
   }
  
 
-  const [Errors, setErrors] = useState(true);
   const checkForm = () => {
     try {
       Formik.errors.username
@@ -120,7 +128,7 @@ export const Signup = () => {
         ? notify(Formik.errors.email)
         : Formik.errors.password
         ? notify(Formik.errors.password)
-        : console.log('Form Checked');
+        : setErrors(false);
     } catch (error) {
       console.log('Error Checking Form:', error);
     }
@@ -195,12 +203,7 @@ export const Signup = () => {
               }}
               className={styles.button}
             >
-              {Errors ? "Sign Up": (
-                  
-                  <Link to="/signin" className={styles.link}>
-                    Sign Up
-                  </Link>
-                )}
+              {loading ? <Loading /> : "Sign Up"}
               
             </button>
 
