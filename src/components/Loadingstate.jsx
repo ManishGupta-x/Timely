@@ -2,9 +2,13 @@ import React from 'react';
 
 const Loading = () => {
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-700 bg-opacity-50 z-50">
-      <div className="border-8 border-gray-200 rounded-full h-24 w-24 animate-spin"></div>
-    </div>
+    <div
+    className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+    role="status">
+    <span
+      className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+    >Loading...</span>
+  </div>
   );
 };
 

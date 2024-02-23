@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import styles from "./Signin.module.css";
-import { Link, redirect, useNavigate } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaUser, FaLock } from "react-icons/fa";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Loading from "../../../components/Loadingstate";
 
 export const Signin = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // State for loading indicator
 
-  const customId = "custom-id-yes";
   const notify = (error) => {
+    // Toast notification function
     toast.error(error, {
       position: "top-center",
       autoClose: 5000,
@@ -22,123 +22,76 @@ export const Signin = () => {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      toastId: customId
     });
-  };  
-
-  const notifys = (msg) => {
-    toast.success(msg, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-
-    });
-  }
+  };
 
   const submitForm = async (values) => {
-    
+    try {
+      setLoading(true); // Set loading state to true when submitting form
 
-    try { 
       const response = await fetch(`https://timely-qpcg.onrender.com/api/login`, {
-      
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values),
       });
-     
 
-    if (!response.ok) {
-      throw new Error('Failed To Submit');
+      if (!response.ok) {
+        throw new Error('Failed To Submit');
       }
-      let data = await response.json();
+
+      const data = await response.json();
 
       if (!data.error) {
-       
-        const token = await data.data.token;
-        localStorage.setItem('token', token); 
+        const token = data.data.token;
+        localStorage.setItem('token', token);
         localStorage.setItem('email', values.email);
-        if (localStorage.getItem('email')) {
-          const email = localStorage.getItem('email');
-          console.log('Email' , email)
-        }
-        if (localStorage.getItem('token')) {
-          console.log('Token stored successfully:', token);
-          navigate("/home")
-        } else {
-          console.error('Failed to store token');
-        }
+        navigate("/home");
+      } else {
         notify(data.error_message);
-        return data;
       }
-      return data.error;
-      
+
+      setLoading(false); // Set loading state to false after receiving response
     } catch (error) {
-      
-      console.log('Error Submitting',error);
-      
+      console.log('Error Submitting', error);
+      setLoading(false); // Set loading state to false if an error occurs
     }
-  }
+  };
+
   const validate = (values) => {
     let errors = {};
     if (!values.email) {
       errors.email = "Email Required";
-    } else if (
-      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test(values.email)
-    ) {
+    } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test(values.email)) {
       errors.email = "Invalid Email";
     }
 
     if (!values.password) {
       errors.password = "Password Required";
     }
-    // } else if (!/(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)/.test(values.password)) {
-    //   errors.password = "Password must contain at least one number, one character, and one special character";
-    // }
 
     return errors;
   };
+
   const Formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit: submitForm,
     validate,
   });
-  const [Errors, setErrors] = useState(false);
-
-  const checkForm = () => {
-    try {
-     
-         Formik.errors.email
-        ? notify(Formik.errors.email)
-        : Formik.errors.password
-        ? notify(Formik.errors.password)
-        : console.log('Form Checked');
-    } catch (error) {
-      console.log('Error Checking Form:', error);
-    }
-  }
-  console.log("Formik", Formik.values);
 
   return (
     <div className={styles.container}>
       <div>
-          <h1>
-            <Link to="/" className={styles.logo}>
+        <h1>
+          <Link to="/" className={styles.logo}>
             <img src='https://imgur.com/m3Vpsos.png' className="w-12 h-12"/><span className="font-garamond font-serif text-3xl mt-1 pl-2">Timely</span>
-            </Link>
-          </h1>
-        </div>
+          </Link>
+        </h1>
+      </div>
       <div className={styles.content}>
         <div className={styles.wrapper}>
           <form onSubmit={Formik.handleSubmit}>
@@ -162,7 +115,6 @@ export const Signin = () => {
                 onChange={Formik.handleChange}
                 value={Formik.values.password}
               />
-
               <FaLock className={styles.icon} />
             </div>
 
@@ -171,24 +123,14 @@ export const Signin = () => {
                 <input type="checkbox" /> Remember me
               </label>
               <Link to="#" className={styles.forgot}>
-                {" "}
-                Forgot Password?{" "}
+                Forgot Password?
               </Link>
             </div>
 
-            <button
-              type="submit"
-              onClick={async () => {
-                
-                checkForm();
-                setErrors(submitForm(Formik.values));
-
-              } }
-              className={styles.button}
-            >
-             Login
+            <button type="submit" className={styles.button}>
+              {loading ? <Loading /> : "Login"}
             </button>
-            
+
             <div className={styles.register}>
               <p>
                 Don't have an account?{" "}
@@ -198,7 +140,6 @@ export const Signin = () => {
               </p>
             </div>
           </form>
-          
         </div>
       </div>
       <ToastContainer autoClose={2000} limit={1} />
