@@ -7,13 +7,12 @@ import { IoEyeSharp } from "react-icons/io5";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loading from "../../../components/Loadingstate";
 
 export const Signup = () => {
-  const [loading, setLoading] = useState(false);
+ 
   const validate = (values) => {
     let errors = {};
-
+    
     if (!values.username) {
       errors.fname = "Username Required";
     }
@@ -43,6 +42,7 @@ export const Signup = () => {
     },
     onSubmit: async (values) => {
       console.log(values);
+    
     },
     validate,
   });
@@ -69,51 +69,49 @@ export const Signup = () => {
       draggable: true,
       progress: undefined,
       theme: "dark",
+
     });
-  };
+  }
+
+  
 
   const submitForm = async (values) => {
-    setLoading(true); // Set loading state to true when submitting form
-
+    
     try {
-      const response = await fetch(
-        `https://timely-qpcg.onrender.com/api/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
-
-      if (!response.ok) {
-        if (response.status === 400) {
-          const responseData = await response.json();
-          const errorMessage = Object.values(responseData.error_message).join(' '); // Extracting and joining error messages from the array
-          notify(errorMessage); 
-          setLoading(false);
-          return responseData.error; 
-        } else {
-          throw new Error("Failed To Submit");
-        }
+      const response = await fetch(`https://timely-qpcg.onrender.com/api/register`, {
+      
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values),
+      });
+      
+    
+    if (!response.ok) {
+      throw new Error('Failed To Submit');
       }
-
-      const data = await response.json();
-      console.log("data", data);
-      console.log("response", response);
+      
+    
+        const data = await response.json();
+        console.log("data", data);
+        console.log("response", response);
       console.log(data.success_message);
-      notifys("Account Created Successfully");
-      setLoading(false);
-      return data.error;
+      notifys("Account Created Successfully")
+      setErrors(false);
+        return data.error;
+      
     } catch (error) {
-      console.log("error", error);
-      console.log("Error Submitting");
-      setLoading(false); // Set loading state to false after receiving response
+      
+      console.log("error" , error);
+      console.log('Error Submitting');
     }
-  };
+    
+    
+  }
+ 
 
-  const [Errors, setErrors] = useState(false);
+  const [Errors, setErrors] = useState(true);
   const checkForm = () => {
     try {
       Formik.errors.username
@@ -122,11 +120,11 @@ export const Signup = () => {
         ? notify(Formik.errors.email)
         : Formik.errors.password
         ? notify(Formik.errors.password)
-        : console.log("Form Checked");
+        : console.log('Form Checked');
     } catch (error) {
-      console.log("Error Checking Form:", error);
+      console.log('Error Checking Form:', error);
     }
-  };  
+  }
 
   console.log(Formik.values);
 
@@ -136,10 +134,7 @@ export const Signup = () => {
         <div>
           <h1>
             <Link to="/" className={styles.logo}>
-              <img src="https://imgur.com/m3Vpsos.png" className="w-12 h-12" />
-              <span className="font-garamond font-serif text-3xl mt-1 pl-2">
-                Timely
-              </span>
+            <img src='https://imgur.com/m3Vpsos.png' className="w-12 h-12"/><span className="font-garamond font-serif text-3xl mt-1 pl-2">Timely</span>
             </Link>
           </h1>
         </div>
@@ -161,7 +156,7 @@ export const Signup = () => {
 
               <FaUser className={styles.icon} />
             </div>
-
+          
             <div className={styles.inputbox}>
               <input
                 type="email"
@@ -193,20 +188,20 @@ export const Signup = () => {
             <button
               type="submit"
               onClick={async () => {
+                
                 checkForm();
                 setErrors(submitForm(Formik.values));
+
               }}
               className={styles.button}
             >
-              {loading ? (
-                <Loading />
-              ) : Errors ? (
-                "Sign Up"
-              ) : (
-                <Link to="/signin" className={styles.link}>
-                  Sign Up
-                </Link>
-              )}
+              {Errors ? "Sign Up": (
+                  
+                  <Link to="/signin" className={styles.link}>
+                    Sign Up
+                  </Link>
+                )}
+              
             </button>
 
             <div className={styles.register}>
