@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
+import { Link } from "react-router-dom";
 
 
 export const Home = () => {
@@ -88,12 +89,13 @@ export const Home = () => {
             Start organizing your <br />
             Schedules now!
           </p>
-          <a
-            href="/home/Schedules"
-            className="inline-block mt-10 ml-36 px-4 py-2 bg-[#F8685B] text-white rounded-lg hover:bg-violet-600 transition duration-300"
-          >
-            Go to Schedules
-          </a>
+          
+          <Link to= "/home/Schedules"  >
+          <button className="inline-block mt-10 ml-36 px-4 py-2 bg-[#F8685B] text-white rounded-lg hover:bg-violet-600 transition duration-300">
+          Go to Schedules
+          </button>
+          </Link>
+           
         </div>
         
         <div className="h-[180px] ml-14 py-4 px-4 relative group bg-gray-300 rounded-xl">
@@ -101,12 +103,12 @@ export const Home = () => {
             Generate Study Flash <br />
             Cards!!
           </p>
-          <a
-            href="#"
+          <Link
+           to = "#"
             className="inline-block mt-10 ml-36 px-4 py-2 bg-[#F8685B] text-white rounded-lg hover:bg-violet-600 transition duration-300"
           >
             Coming Soon
-          </a>
+          </Link>
         </div>
       </div>
       {/* <div className="container flex">
