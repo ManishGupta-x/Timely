@@ -15,7 +15,7 @@ import {
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { Header } from "../components";
 import { useNavigate, useParams } from "react-router-dom";
-import Loading from "../components/Loadingstate";
+import LoadingComponent from "../components/LoadingComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -89,6 +89,26 @@ export const SCalendar = () => {
     fetchData();
   }, [email]);
 
+  const messages = [
+    "Assembling your time table schedule, buckle up!",
+    "Fetching data to create your personalized time table...",
+    "Procrastination meter at 0%, building time table in progress...",
+    "Connecting the dots to build your ideal schedule...",
+    "Getting your tasks organized, stay tuned!",
+    "Brewing the perfect time table layout, just a moment!"
+  ];
+  
+  // state variable for current message index
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
+    }, 3000); // Change interval as needed
+  
+    return () => clearInterval(interval);
+  }, []);
+
   const fetchUserData = async (email) => {
     const url = "https://timely-qpcg.onrender.com/api/getuserbyemail";
     try {
@@ -157,7 +177,7 @@ export const SCalendar = () => {
       <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-slate-100 rounded-3xl">
         <Header category="App" title="Calendar" />
         {loading ? (
-          <Loading />
+          <LoadingComponent message={messages[currentMessageIndex]} />
         ) : (
           <>
             <ScheduleComponent

@@ -5,15 +5,16 @@ import { Button } from '.';
 import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import avatar from '../data/avatar.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
 
   const [username, setUsername] = useState("User");
+  
   const useremail = localStorage.getItem("email");
   const [email, setEmail] = useState(useremail);
-  
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUserData = async () => {
       const url = "https://timely-qpcg.onrender.com/api/getuserbyemail";
@@ -37,7 +38,7 @@ const UserProfile = () => {
           throw new Error(responseData.error_message || 'Error fetching user data');
         }
 
-        setUserData(responseData.data);
+    
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -45,6 +46,15 @@ const UserProfile = () => {
 
     fetchUserData();
   }, [email]);
+
+  const handleLogout = () => {
+   
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    console.log("removed items");
+    navigate("/");
+   
+  };
 
   
   return (
@@ -78,6 +88,7 @@ const UserProfile = () => {
           text="Logout"
           borderRadius="10px"
           width="full"
+          onClick={handleLogout}
         />
       </div>
     </div>

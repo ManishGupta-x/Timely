@@ -16,8 +16,9 @@ export const Schedules = () => {
   const email = localStorage.getItem("email");
   const [id, setId] = useState(0);
   const [scheduleData, setScheduleData] = useState([]);
-  const [loading, setLoading] = useState(true); // State for loading indicator
+  const [loading, setLoading] = useState(false); // State for loading indicator
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const userData = await fetchUserData(email);

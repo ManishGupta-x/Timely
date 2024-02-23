@@ -78,7 +78,7 @@ export const Signup = () => {
   }
 
   
-
+  
   const submitForm = async (values) => {
     
     try {
@@ -203,8 +203,7 @@ export const Signup = () => {
               }}
               className={styles.button}
             >
-              {loading ? <Loading /> : "Sign Up"}
-              
+              {loading ? <Loading /> : "Sign Up"}    
             </button>
 
             <div className={styles.register}>
