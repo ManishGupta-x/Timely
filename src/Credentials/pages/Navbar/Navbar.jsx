@@ -56,9 +56,7 @@ export const Navbar = () => {
                 About
               </Link>
             </li>
-            <li>
-              <Link to='/FAQ' className={styles.link}>FAQ</Link>
-            </li>
+           
             <li>
               <Link to='/contact' className={styles.link} >Contact</Link>
             </li>

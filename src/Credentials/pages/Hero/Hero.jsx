@@ -37,8 +37,8 @@ export const Hero = () => {
             Conquer & Simplify your Life with us!
           </p>
           <Link
-            to
-            href="/signin"
+            to = "/signup"
+          
             className={styles.signinBtn}
             data-aos="zoom-in"
           >

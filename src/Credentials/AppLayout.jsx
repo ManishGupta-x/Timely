@@ -30,7 +30,7 @@ export const AppLayout = () => {
         </div>
       </div>
       <div className={styles.container}>
-        <h3 className={styles.text } data-aos= "flip-right" data-aos-duration = "800">FEATURES</h3>
+        {/* <h3 className={styles.text } data-aos= "flip-right" data-aos-duration = "800">FEATURES</h3> */}
         <div className={styles.line}></div>
         <div className={styles.glassContainer} data-aos = "flip-left" data-aos-duration="1400">
           <div className={styles.worried}>
@@ -70,7 +70,7 @@ export const AppLayout = () => {
           </div>
         </div>
       </div>
-      <div className={styles.container3}>
+      {/* <div className={styles.container3}>
         <div className={styles.glass1} >
           <h2 className="text-white text-2xl font-garamond">Attributes</h2>
           <ul className="text-white">
@@ -83,7 +83,7 @@ export const AppLayout = () => {
         <div className={styles.glass1} >
           
           </div>
-      </div>
+      </div> */}
       <div className={styles.container2}>
       <div className={styles.line2}></div>
           <Footer/>
