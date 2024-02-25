@@ -78,9 +78,8 @@ export const SCalendar = () => {
         responseData.data.timeslabs.map((timeslab) => ({
           Id: timeslab.id,
           Subject: timeslab.task_name,
-          StartTime:
-            timeslab.date.split("T")[0] + "T" + timeslab.start_time + "Z",
-          EndTime: timeslab.date.split("T")[0] + "T" + timeslab.end_time + "Z",
+          StartTime: timeslab.start_time,
+          EndTime: timeslab.end_time ,
           CategoryColor: timeslab.timeslab_color,
         }))
       );

@@ -955,22 +955,7 @@ export const TimetableGrid = [
 // ];
 
 export const taskData = [
-  {
-    Id: 1,
-    Subject: "Explosion of Betelgeuse Star",
-    Location: "Space Center USA",
-    StartTime: "2021-01-10T04:00:00.000Z",
-    EndTime: "2021-01-10T05:30:00.000Z",
-    CategoryColor: "#1aaa55",
-  },
-  {
-    Id: 2,
-    Subject: "Explosion of  Star",
-    Location: "Space Center USA",
-    StartTime: "2021-01-10T07:00:00.000Z",
-    EndTime: "2021-01-10T08:30:00.000Z",
-    CategoryColor: "#a12  23d",
-  },
+  
 ];
 
 export const lineChartData = [
