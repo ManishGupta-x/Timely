@@ -44,6 +44,16 @@ export const SCalendar = () => {
     });
   };
 
+  function formatTime(timeslab,date) {
+    // Check if the input time is in the format "YYYY-MM-DDTHH:MM:SSZ"
+    const timeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
+    if (timeRegex.test(timeslab)) {
+        // If input time is in "YYYY-MM-DDTHH:MM:SSZ" format, return as it is
+        return timeslab;
+    } else {
+      return date.split("T")[0] + "T" + timeslab + "Z";
+    }
+}
   useEffect(() => {
     const fetchData = async () => {
       const userData = await fetchUserData(email);
@@ -78,8 +88,8 @@ export const SCalendar = () => {
         responseData.data.timeslabs.map((timeslab) => ({
           Id: timeslab.id,
           Subject: timeslab.task_name,
-          StartTime: timeslab.start_time,
-          EndTime: timeslab.end_time ,
+          StartTime: formatTime(timeslab.start_time,timeslab.date),
+          EndTime: formatTime(timeslab.end_time,timeslab.date),
           CategoryColor: timeslab.timeslab_color,
         }))
       );
