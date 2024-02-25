@@ -4,6 +4,7 @@ import { Link,useLocation } from "react-router-dom";
 import AOS from 'aos';
 import 'aos/dist/aos.css'
 import { useEffect } from "react";
+import { animateScroll as scroll } from 'react-scroll';
 export const Navbar = () => {
   
   const location = useLocation();
@@ -33,6 +34,13 @@ export const Navbar = () => {
 
   }, []);
 
+  const handleScroll = () => {
+    scroll.scrollTo(window.innerHeight, {
+      duration: 1100, 
+      smooth: 'easeInOutQuart'  
+    });
+  };
+
   return (
     <>
       <nav className={styles.navbar} data-aos = "fade-down" data-aos-duration = "800">
@@ -51,10 +59,10 @@ export const Navbar = () => {
             ></img>
           </div>
           <ul className={`${styles.menuItems} ${menuOpen && styles.menuOpen}`} onClick={() => setMenuOpen(false)}>
-            <li>
-              <Link to='/about' className={styles.link}>
+            <li onClick={handleScroll} className={styles.link}>
+             
                 About
-              </Link>
+          
             </li>
            
             <li>
