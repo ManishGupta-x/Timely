@@ -100,6 +100,9 @@ export const AddTask = () => {
       errors.behaviour = "Select Task Priority";
     }
 
+    if (!values.estimated_length) {
+      errors.estimated_length = "Mention Task Length";
+    }
     if (!values.starts_on) {
       errors.starts_on = "Start Date Of Schedule is Required";
     } else if (!/^\d{2}\/\d{2}\/\d{4}$/i.test(values.starts_on)) {
@@ -137,6 +140,7 @@ export const AddTask = () => {
       difficulty: "",
       priority: "",
       no_of_revisions: "1",
+      estimated_length:""
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -211,7 +215,16 @@ export const AddTask = () => {
                 <option value="3">High</option>
               </select>
             </div>
-
+            <div className={styles.inputbox}>
+                  <input
+                    type="text"
+                    placeholder="Estimated Length(mins)"
+                    name="estimated_length"
+                    onChange={Formik.handleChange}
+                    value={Formik.values.estimated_length}
+                  />
+                  <FaBusinessTime className={styles.icon} />
+                </div>
             <button
               type="submit"
               className={styles.button}
