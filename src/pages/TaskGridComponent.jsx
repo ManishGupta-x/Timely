@@ -50,6 +50,8 @@ const TaskGridComponent = () => {
     </div>
   );
   useEffect(() => {
+
+    const difficultyLevels = ["Low", "Moderate", "High"];
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -67,8 +69,8 @@ const TaskGridComponent = () => {
           return {
             Name: item.name,
             Duration: item.estimated_length,
-            Difficulty: item.difficulty,
-            Priority: item.priority,
+            Difficulty:  difficultyLevels[item.difficulty - 1],
+            Priority:  difficultyLevels[item.priority - 1],
             Image: imageUrl,
           };
         }));
