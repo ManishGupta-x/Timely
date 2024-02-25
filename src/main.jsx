@@ -14,7 +14,6 @@ import { ContextProvider } from "./contexts/ContextProvider.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {AddSchedule} from "./Credentials/pages/Forms/AddSchedule.jsx";
 import  AddTask from "../src/Credentials/pages/Forms/AddTask.jsx";
-import About from "../src/Credentials/pages/About/About.jsx";
 import Contact from "../src/Credentials/pages/Contact/Contact.jsx"
 
 ReactDOM.render(
@@ -25,7 +24,6 @@ ReactDOM.render(
           <Route path="/home/*" element=<App /> />
           <Route path="/" element=<AppLayout /> />
           <Route path="/signin" element=<Signin /> />
-          <Route path="/about" element=<About/>/>
           <Route path="/contact" element=<Contact/>/>
           <Route path = "/signup" element = <Signup/>/>
           <Route path = "/scheduleadd" element = <AddSchedule/>/>
