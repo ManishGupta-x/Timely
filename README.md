@@ -1,11 +1,46 @@
-# React + Vite
+# Timely
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Timely is a personalized learning platform designed to streamline study scheduling AI tool and enhance academic productivity.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To install Timely, follow these steps:
 
+Clone the repository to your local machine:
 
-Change user_id to user
+```bash
+git clone https://github.com/your-username/timely.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd Timely
+```
+Install dependencies using npm:
+
+```
+npm install
+```
+## USAGE
+
+To build the project for production, run the following command:
+
+```bash
+npm run build
+```
+
+To build the project for development with hot reloading, run:
+
+```bash
+npm run dev
+```
+After building the project, you can access Timely through your web browser.
+
+## Contributing
+
+Contributions from the community will be honored ! If you'd like to contribute to Timely, please fork the repository, make your changes, and submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
